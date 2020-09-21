@@ -1,0 +1,107 @@
+using System;
+
+/*
+ namespace CS_experiment
+{
+    class Name
+    {
+        private string name;
+        public void Welcome()
+        {
+            Console.WriteLine(name + "你好");
+        }
+        public void inset()
+        {
+            name = Console.ReadLine();
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Name N = new Name();
+            N.inset();
+            N.Welcome();
+        }
+    }
+}
+*/
+/*
+ class Program
+    {
+        static void Main(string[] args)
+        {
+            int I1 = 10;
+            long L1 = 10000000000;
+            float F1 = 3.14F;
+            double D1 = 6.28;
+            decimal Deci = 9.42M;
+            I1 =(int)L1;
+            D1 = F1;
+            F1 =(float) D1;
+            Deci =(decimal) F1;
+            Console.WriteLine("I1={0},L1={1},F1={2},D1={3},Deci={4}",I1,L1,F1,D1,Deci );
+        }
+*/
+
+
+
+namespace C_sharp1._4
+{
+    class Square
+    {
+        public float x1, y1, y2, x2;
+        private float h, l, s;
+        public void Calculate(float x1_, float x2_, float y1_, float y2_)
+        {
+            x1 = x1_;
+            x2 = x2_;
+            y1 = y1_;
+            y2 = y2_;
+            h = x2 - x1;
+            l = y2 - y1;
+        }
+        public void Display()
+        {
+            Console.WriteLine("长={0},宽={1},(x,y)=({2},{3})", l, h, x1, y1);
+            Console.WriteLine("面积为" + s);
+        }
+        public Square()
+        { }
+        public Square(float x1, float x2, float y1, float y2)
+        {
+            x1 = 1;
+            y1 = 1;
+            x2 = 2;
+            y2 = 2;
+        }
+        public void Area()
+        {
+            s = l * h;
+        }
+        public void Read()
+        {
+            Console.WriteLine("请输入x1、x2、y1、y2");
+            string x11 = Console.ReadLine();
+            string x22 = Console.ReadLine();
+            string y11 = Console.ReadLine();
+            string y22 = Console.ReadLine();
+            x1 = int.Parse(x11);
+            x2 = int.Parse(x22);
+            y1 = int.Parse(y11);
+            y2 = int.Parse(y22);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Square s = new Square(1, 1, 2, 2);
+            s.Read();
+            s.Calculate(s.x1, s.x2, s.y1, s.y2);
+            s.Area();
+            s.Display();
+        }
+    }
+}
+
