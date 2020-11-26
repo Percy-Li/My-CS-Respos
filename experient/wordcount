@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Dealsentence
+    {
+        private string array_1, array_2, array_3;
+        public Dealsentence(string[] t)
+        {
+            array_1 = t[1];
+            array_2 = t[0];
+        }
+        public void Control()
+        {
+            int j = 0;
+            char[] c = array_1.ToCharArray();
+            char[] b = array_2.ToCharArray();
+            Array.Sort(b);
+            if (array_2.Length == 0)
+            {
+                Console.WriteLine(array_1);
+            }
+            else
+            {
+                foreach (char m in b)
+                {
+                    switch (m)
+                    {
+                        case 'r': Array.Reverse(c); array_1 = new string(c); break;
+                        case 'u': array_1 = array_1.ToUpper(); break;
+                        default: break;
+                    }
+                }
+                foreach (char m in b)
+                {
+                    switch (m)
+                    {
+                        case 'w': string[] s = array_1.Split(new char[] { ' ' }); foreach (string i in s) { Console.Write(i.ToString() + '\r' + '\n'); j++; } break;
+                    }
+                }
+                if (j == 0)
+                {
+                    Console.WriteLine(array_1);
+                }
+            }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dealsentence h = new Dealsentence(args);
+            h.Control();
+            Console.ReadKey();
+        }
+    }
+}
