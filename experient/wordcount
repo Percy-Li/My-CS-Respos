@@ -1,0 +1,109 @@
+using System;
+
+
+namespace DealSentence
+{
+    class DealSentence
+    {
+        private string in_sentence;
+        private string[] out_sentence;
+        private string out_string_sentence;
+        private bool w;
+        private bool r;
+        private bool u;
+
+        public DealSentence(string[] In, bool m_w, bool m_r, bool m_u)
+        {
+            w = m_w;
+            r = m_r;
+            u = m_u;
+            if (w || r || u)
+            {
+                in_sentence = In[In.Length - 1];
+            }
+            else
+                out_string_sentence = In[0];
+        }
+        public void ProccessSentence()  //接口
+        {
+            R(r);
+            U(u, r);
+            OutPut(w);
+            W(w);
+
+        }
+        private void OutPut(bool w)
+        {
+            if (!w)
+            {
+                Console.WriteLine(out_string_sentence);
+            }
+        }
+        private void W(bool W)
+        {
+            if (W)
+            {
+                string[] wordArray = in_sentence.Split(' ');
+                out_sentence = wordArray;
+                for (int i = 0; i < out_sentence.Length; i++)
+                {
+                    Console.WriteLine(out_sentence[i]);
+                }
+            }
+        }
+        private void R(bool R)
+        {
+            if (R)
+            {
+                out_string_sentence = null;
+                char[] cha = in_sentence.ToCharArray();
+                Array.Reverse(cha);
+                for (int i = 0; i < cha.Length; i++)
+                {
+                    out_string_sentence += string.Format("{0}", cha[i]);
+                }
+            }
+        }
+        private void U(bool U, bool R)
+        {
+            if (U)
+            {
+
+                for (int i = 0; i < in_sentence.ToCharArray().Length; i++)
+                {
+                    if (u && !r)
+                    {
+                        out_string_sentence += string.Format("{0}", in_sentence.ToCharArray()[i]);
+                    }
+                    out_string_sentence = out_string_sentence.ToUpper();
+                }
+            }
+        }
+    }//class DealSentence End
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool W = false;
+            bool R = false;
+            bool U = false;
+            foreach (string option in args)
+            {
+                switch (option)
+                {
+                    case "-w":
+                        W = true; break;
+                    case "-r":
+                        R = true; break;
+                    case "-u":
+                        U = true; break;
+                    default:
+                        break;
+                }
+            }
+            DealSentence DST = new DealSentence(args, W, R, U);
+            DST.ProccessSentence();
+            Console.ReadKey();
+        }//Main End
+    }//class program End
+}
