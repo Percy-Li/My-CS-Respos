@@ -1,0 +1,118 @@
+using System;
+
+namespace MyDate
+{
+    class MyDate
+    {
+        static int[] day_max = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        private int m, d, y;
+        public int M
+        {
+            get { return m; }
+            set
+            {
+                if (check_date(value, d, y)) 
+                    m = value;
+                Console.WriteLine("\nnow,the date is set to :{0}", this);
+            }
+        }
+        public int D
+        {
+            get { return d; }
+            set
+            {
+                if (check_date(m, value , y)) 
+                    d = value;
+                Console.WriteLine("\nnow,the date is set to :{0}", this);
+            }
+        }
+        public int Y
+        {
+            get { return y; }
+            set
+            {
+                if (check_date(m, d, value)) 
+                    y = value;
+                Console.WriteLine("\nnow,the date is set to :{0}", this);
+            }
+        }
+        static private bool check_date(int month,int day,int year)//检查合法性
+        {
+            if (vaildity_check(month, day, year)) return true;
+            Console.WriteLine("\n要设置的日期：{0}/{1}/{2}不合法，请重新输入！", month, day, year);
+            return false;
+        }
+        static private bool vaildity_check(int month,int day,int year)//日期合法性校验
+        {
+            if (day < 0 || day > 31 || month < 0 || month > 12 || year < 0)
+                return false;
+            if (day > day_max[month - 1])
+                return false;
+            if(day==29&&month==2)//闰年
+            {
+                if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))//是闰年
+                    return true;
+                return false;//不是闰年
+            }
+            return true;
+        }
+        public MyDate() : this(1, 1, 1900) { }
+        public MyDate(int month,int day,int year)
+        {
+            if (vaildity_check (month ,day,year))
+            {
+                m = month;
+                d = day;
+                y = year;
+            }
+            else
+            {
+                Console.WriteLine("\n要创建的日期：{0}/{1}/{2}不合法，请重新输入！", month, day, year);
+                m = 1;
+                d = 1;
+                y = 1900;
+                Console.WriteLine("\n已创建为默认日期：{0}", this);
+            }
+        }
+        public override string ToString() 
+        {
+            return string.Format("{0}/{1}/{2}", m, d, y);
+        }
+        public void DisplayDate()
+        {
+            Console.WriteLine("\n" + this + "\n");
+        }
+        public void SetDate()
+        {
+            Console.WriteLine("请输入要创建的日期：");
+            m = Convert.ToInt32(Console.ReadLine());
+            d = Convert.ToInt32(Console.ReadLine());
+            y = Convert.ToInt32(Console.ReadLine());
+        }
+    }
+    class DateTest
+    { 
+        public DateTest ()
+        {
+            MyDate d1 = new MyDate(2, 30, 2014);
+            MyDate d2 = new MyDate(3, 29, 2000);
+            d1 = new MyDate(2, 29, 2000);
+            d2 = new MyDate(4, 30, 2014);
+            d2.D = 31;
+            d1.D = 14;
+            d2.M = 6;
+            d2.DisplayDate();
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            MyDate oneDate = new MyDate();
+            oneDate.SetDate();
+            oneDate =new MyDate(oneDate .M ,oneDate .D ,oneDate .Y );
+            oneDate.DisplayDate();
+            Console.WriteLine(oneDate);
+        }
+    }
+}
